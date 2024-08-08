@@ -9,6 +9,7 @@
     "start": "node ./dist/main.js",
     "dev": "nodemon",
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
+    "generate": "npx prisma generate",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix"
@@ -16,6 +17,7 @@
   "author": "Olga Klimenko",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.18.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
     "bcryptjs": "^2.4.3",
@@ -36,6 +38,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^3.1.4",
     "prettier": "^2.4.1",
+    "prisma": "^5.18.0",
     "ts-node": "^10.9.2"
   }
 }
