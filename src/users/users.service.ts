@@ -29,7 +29,6 @@ export class UserService implements IUserService {
 	}
 
 	async validateUser({ email, password }: UserLoginDto): Promise<boolean> {
-		const salt = this.configService.get('SALT');
 		const existedUser = await this.usersRepository.find(email);
 		if (!existedUser) {
 			return false;

@@ -7,6 +7,7 @@ import { UserService } from './users.service';
 import { TYPES } from '../types';
 import { UserModel } from '@prisma/client';
 import { User } from './user.entity';
+import { UserLoginDto } from './dto/user-login.dto';
 
 const ConfigServiceMock: IConfigService = {
 	get: jest.fn(),
@@ -36,7 +37,7 @@ let createdUser: UserModel | null;
 
 describe('User service', () => {
 	it('createUser', async () => {
-		configService.get = jest.fn().mockReturnValueOnce('1');
+		configService.get = jest.fn().mockReturnValueOnce('salt');
 		usersRepository.create = jest.fn().mockImplementationOnce(
 			(user: User): UserModel => ({
 				name: user.name,
@@ -52,5 +53,36 @@ describe('User service', () => {
 		});
 		expect(createdUser?.id).toEqual(1);
 		expect(createdUser?.password).not.toEqual('qwerty');
+	});
+
+	it('validateUser - success', async () => {
+		configService.get = jest.fn().mockReturnValueOnce('salt');
+		usersRepository.find = jest.fn().mockReturnValueOnce(createdUser);
+		const userLoginDto: UserLoginDto = {
+			email: 'example@example.com',
+			password: 'qwerty',
+		};
+		const validatedUser = await usersService.validateUser(userLoginDto);
+		expect(validatedUser).toEqual(true);
+	});
+	it('validateUser - wrong password', async () => {
+		configService.get = jest.fn().mockReturnValueOnce('salt');
+		usersRepository.find = jest.fn().mockReturnValueOnce(createdUser);
+		const userLoginDto: UserLoginDto = {
+			email: 'example@example.com',
+			password: 'wrong',
+		};
+		const validatedUser = await usersService.validateUser(userLoginDto);
+		expect(validatedUser).toEqual(false);
+	});
+	it('validateUser - user not found', async () => {
+		configService.get = jest.fn().mockReturnValueOnce('salt');
+		usersRepository.find = jest.fn().mockReturnValueOnce(null);
+		const userLoginDto: UserLoginDto = {
+			email: 'example@example.com',
+			password: 'qwerty',
+		};
+		const validatedUser = await usersService.validateUser(userLoginDto);
+		expect(validatedUser).toEqual(false);
 	});
 });
