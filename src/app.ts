@@ -6,7 +6,7 @@ import { ILogger } from './logger/logger.interface';
 import { inject, injectable } from 'inversify';
 import { TYPES } from './types';
 import 'reflect-metadata';
-import {json} from 'body-parser'
+import { json } from 'body-parser';
 
 @injectable()
 export class App {
