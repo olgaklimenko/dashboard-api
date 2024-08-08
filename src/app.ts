@@ -7,6 +7,8 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from './types';
 import 'reflect-metadata';
 import { json } from 'body-parser';
+import { ConfigService } from './config/config.service';
+import { IConfigService } from './config/config.service.interface';
 
 @injectable()
 export class App {
@@ -17,6 +19,7 @@ export class App {
 	constructor(
 		@inject(TYPES.ILogger) private logger: ILogger,
 		@inject(TYPES.IUserController) private userController: UserController,
+		@inject(TYPES.IConfigService) private configService: IConfigService,
 		@inject(TYPES.ExceptionFilter) private exceptionFilter: ExceptionFilter,
 	) {
 		this.app = express();
