@@ -10,7 +10,7 @@
     "dev": "nodemon",
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
     "generate": "npx prisma generate",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix"
   },
@@ -32,6 +32,7 @@
     "tslog": "^3.3.4"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^8.5.5",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
@@ -41,6 +42,7 @@
     "nodemon": "^3.1.4",
     "prettier": "^2.4.1",
     "prisma": "^5.18.0",
+    "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2"
   }
 }
