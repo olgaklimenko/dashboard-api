@@ -11,6 +11,7 @@
     "dev:inspect": "nodemon -e ts,json --exec node --inspect=localhost:9222 -r ts-node/register src/main.ts",
     "generate": "npx prisma generate",
     "test": "jest",
+    "test:e2e": "jest --config jest.e2e.config.ts",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix"
   },
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^8.5.5",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
@@ -42,6 +44,7 @@
     "nodemon": "^3.1.4",
     "prettier": "^2.4.1",
     "prisma": "^5.18.0",
+    "supertest": "^7.0.0",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2"
   }
